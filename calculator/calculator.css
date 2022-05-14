@@ -54,11 +54,21 @@ button {
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
-  background-color: rgb(150,150,150);
+  background-color: #CCCCFF;
   color: white;
   max-width: 300px;
   min-width: 230px;
   border: 3px solid black
+}
+
+button:hover {
+  background-color: paleturquoise;
+}
+
+button:active {
+  background-color: dodgerblue;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 input {
