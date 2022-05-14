@@ -7,10 +7,10 @@ window.addEventListener('DOMContentLoaded', function() {
       console.log("you clicked the calculate button")
       update();
       
-      const loanAmount = document.querySelector('#loan-amount').value;
-      const loanYears = document.querySelector('#loan-years').value;
-      const yearlyRate = document.querySelector('#loan-rate').value;
-
+      const loanAmount = Number(document.querySelector('#loan-amount').value);
+      const loanYears = Number(document.querySelector('#loan-years').value);
+      const yearlyRate = Number(document.querySelector('#loan-rate').value);
+      console.log(`Data Type: ${typeof loanAmount}`)
       checkValidInputs(loanAmount, loanYears, yearlyRate);
 
       const monthlyPayments = calculateMonthlyPayment(loanAmount, loanYears, yearlyRate);
@@ -21,14 +21,17 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function checkValidInputs(loanAmount, loanYears, yearlyRate) {
+  if (loanAmount <= 0 || loanYears <= 0 || yearlyRate <= 0) {
+    throw new Error("Please enter a value greater than zero")
+  }
   if (typeof loanAmount !== 'number') {
     throw new Error("Please enter a valid number for loan amount input")
   }
   if (typeof loanYears !== 'number') {
-    throw new Error("Please enter a valid number for loan years")
+    throw new Error("Please enter a valid number for loan years input")
   }
   if (typeof yearlyRate !== 'number') {
-    throw new Error("Please enter a valid number for yearly rate")
+    throw new Error("Please enter a valid number for yearly rate input")
   }
 }
 
@@ -42,13 +45,11 @@ function getCurrentUIValues() {
 }
 
 function setupIntialValues() {
-
 }
 
 // Get the current values from the UI
 // Update the monthly payment
 function update() {
-  
 }
 
 // Given an object of values (a value has amount, years and rate ),
@@ -59,10 +60,8 @@ function calculateMonthlyPayment(amount, years, rate) {
   const numerator = amount * monthlyRate;
   const n = Math.floor(years * 12);
   const denominator = (1 - Math.pow((1 + monthlyRate), -n))
-  return (numerator / denominator).toFixed(2);
+  return Number((numerator / denominator).toFixed(2));
 }
-
-
 
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
