@@ -32,7 +32,6 @@ describe("Input Payment Info Tests", function() {
     expect(summaryData[2].innerHTML).toBe('19%');
 
     const paymentData = document.querySelectorAll('#paymentTable tbody tr td')
-    console.log(paymentData)
     expect(paymentData[3].innerHTML).toBe('$200');
     expect(paymentData[4].innerHTML).toBe('$35');
     expect(paymentData[5].innerHTML).toBe('18%');
@@ -45,6 +44,20 @@ describe("Input Payment Info Tests", function() {
     // console.log(allPayments)
     expect(Object.keys(allPayments).length).toBe(0);
   })
+
+  it('should remove a payment table row when X is clicked', function() {
+    billAmtInput.value = 200;
+    tipAmtInput.value = 40;
+    submitPaymentInfo();
+    billAmtInput.value = 400;
+    tipAmtInput.value = 65;
+    submitPaymentInfo();
+    let paymentsList = document.querySelector('#paymentTable tbody');
+    console.log(paymentsList.childNodes);
+    // Same issue I'm having here: child_nodes shows a NodeList(2), but
+    // length is 0 and I cannot figure out why! Help!
+  })
+
 
   // Tear Down:
   afterEach(function() {

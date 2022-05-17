@@ -1,6 +1,5 @@
 let serverNameInput = document.getElementById('serverName');
 let serverForm = document.getElementById('serverForm');
-
 let serverTbody = document.querySelector('#serverTable tbody');
 
 let allServers = {};
@@ -30,15 +29,22 @@ function updateServerTable() {
 
   for (let key in allServers) {
     let curServer = allServers[key];
-
     let newTr = document.createElement('tr');
     newTr.setAttribute('id', key);
 
     let tipAverage = sumPaymentTotal('tipAmt') / Object.keys(allServers).length;
-
+    let removeBtn = document.createElement('button');
+    removeBtn.innerText = 'X';
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
+    newTr.append(removeBtn);
 
     serverTbody.append(newTr);
   }
 }
+
+serverTbody.addEventListener('click', function(evt) {
+  if (evt.target.tagName === 'BUTTON') {
+    evt.target.parentElement.remove();
+  }
+})

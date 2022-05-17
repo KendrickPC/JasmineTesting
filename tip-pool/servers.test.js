@@ -29,6 +29,19 @@ describe("Servers test (with setup and tear-down)", function() {
     expect(serverName[1].innerHTML).toBe('$0.00')
   })
 
+  it('should remove a server from the DOM when the X button is clicked', function() {
+    let serverList = document.querySelector('#serverTable tbody');
+    let child_nodes = serverList.childNodes;
+    submitServerInfo();
+    serverNameInput.value = 'Kenjamin';
+    submitServerInfo();
+    // console.log(child_nodes);
+    // serverNameInput.value = 'Alice' submitted as default
+    expect(child_nodes.length).toEqual(2);
+    // child_nodes shows a NodeList(2), but length is 0 and I cannot figure out why! Help!
+
+  })
+
   afterEach(function() {
     // teardown logic
     serverId = 0;
